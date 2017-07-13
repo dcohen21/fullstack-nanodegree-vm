@@ -29,7 +29,7 @@ class Puppy(Base):
 
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
-    date_of_birth = Column(Date)
+    dateOfBirth = Column(Date)
     gender = Column(String(10), nullable=False)
     weight = Column(Numeric)
     shelter_id = Column(Integer, ForeignKey('shelter.id'))
