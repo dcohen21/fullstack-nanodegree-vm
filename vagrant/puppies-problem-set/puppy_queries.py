@@ -41,22 +41,21 @@ def query_three():
         print(str(puppy.name) + ": " + str(puppy.weight))
 
 
-def is_leap_year():
-    """Helper method to determine whether or not it's a leap year"""
+def query_four():
+    """Prints a list of shelters and the number of puppies in each"""
 
-    today = datetime.date.today()
-    current_year = today.timetuple()[0]
-    if current_year % 4 == 0:
-        if current_year % 100 == 0:
-            return current_year % 400 == 0
-        return True
-    return False
+    result = session.query(Shelter, func.count(Puppy.id))\
+        .join(Puppy)\
+        .group_by(Shelter.id).all()
+
+    for item in result:
+        print(str(item[0].name) + ": " + str(item[1]))
 
 
 def six_months_ago():
     """Helper function to determine the date 6 months ago"""
 
-    # I chose to implement this solution rather than timedelta to get rid
+    # I chose to implement this solution rather than using timedelta to get rid
     # of the leap year problem
 
     today = datetime.date.today()
