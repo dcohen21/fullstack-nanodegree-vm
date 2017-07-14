@@ -23,6 +23,16 @@ def query_one():
 def query_two():
     """Prints a list of puppies under 6 mo old, youngest first"""
 
+    puppy_list = session.query(Puppy.name, Puppy.dateOfBirth)\
+        .filter(Puppy.dateOfBirth >= six_months_ago())\
+        .order_by(Puppy.dateOfBirth.desc()).all()
+
+    for puppy in puppy_list:
+        print(str(puppy.name) + ": " + str(puppy.dateOfBirth))
+
+
+def query_three():
+
 
 def is_leap_year():
     """Helper method to determine whether or not it's a leap year"""
@@ -41,7 +51,7 @@ def six_months_ago():
 
     # I chose to implement this solution rather than timedelta to get rid
     # of the leap year problem
-    
+
     today = datetime.date.today()
     day = today.timetuple()[2]
     month = today.timetuple()[1]
