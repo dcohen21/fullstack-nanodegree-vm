@@ -32,6 +32,13 @@ def query_two():
 
 
 def query_three():
+    """Prints a list of all puppies by ascending weight"""
+
+    puppy_list = session.query(Puppy.name, Puppy.weight)\
+        .order_by(Puppy.weight.asc()).all()
+
+    for puppy in puppy_list:
+        print(str(puppy.name) + ": " + str(puppy.weight))
 
 
 def is_leap_year():
